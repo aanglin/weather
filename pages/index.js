@@ -39,12 +39,18 @@ return <Spinner />
         </Head>
         {/* Background overlay */}
   <div className="absolute top-0 left-0 right-0 bottom-0 bg-black/70 z-[1]" />
-  {/* Image */}
   <Image 
   src="https://images.unsplash.com/photo-1534274988757-a28bf1a57c17?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTR8fHdlYXRoZXJ8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60"
   layout="fill"
   className='object-cover'
   />
+  {/* Image */}
+  {/* <Background 
+  weatherDescription={data.weather ? data.weather[0].main : null}
+  /> */}
+  {/* <div className=' flex justify-center'>
+    <h1 className=' flex justify-center text-white z-10 text-5xl font-bold '> Weather App</h1>
+  </div> */}
   
   <div className='relative flex justify-between items-center max-w-[500px] w-full m-auto pt-4 text-white z-10'>
     <form 
@@ -66,10 +72,10 @@ return <Spinner />
   
         {weather.main && <Weather  data={weather}/>}
   
-  
       </div>
     )
 
   }
 
 }
+  
