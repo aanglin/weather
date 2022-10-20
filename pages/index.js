@@ -5,6 +5,7 @@ import { useState } from 'react'
 import {BsSearch} from 'react-icons/bs'
 import Weather from '../components/weather'
 import Spinner from '../components/spinner'
+import Background from '../components/background'
 
 export default function Home() {
   const [city, setCity] = useState('');
