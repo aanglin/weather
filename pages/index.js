@@ -4,12 +4,15 @@ import axios from 'axios'
 import { useState } from 'react'
 import {BsSearch} from 'react-icons/bs'
 import Weather from '../components/weather'
-import Spinner from '../components/spinner'
-import Background from '../components/background'
+// import Spinner from '../components/spinner'
+import Rain from '../public/rain.jpg'
+import Sunny from '../public/sunny.jpg'
+import Cloudy from '../public/cloudy.jpg'
 
 export default function Home() {
   const [city, setCity] = useState('');
   const [weather, setWeather] = useState({});
+  const [getBackgroundImage, setGetBackgroundImage] = useState(Sunny)
   const [loading, setLoading] = useState(false);
   
   const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=imperial&appid=${process.env.NEXT_PUBLIC_KEY}`
@@ -20,16 +23,14 @@ export default function Home() {
     setLoading(true);
     axios.get(url).then((response) =>{
       setWeather(response.data);
-       console.log(response.data);
-    })
-    setCity('')
-    setLoading(false);
+      if(response.data.weather[0].main === 'Clouds') { setGetBackgroundImage(Cloudy); 
+      } else if (response.data.weather[0].main === 'Rain') { setGetBackgroundImage(Rain);
+       } else { setGetBackgroundImage(Sunny); }
+       setCity('')
+       setLoading(false);
+       })
     
   }
-
-  if (loading) {
-return <Spinner />
-  } else {
     return (
       <div>
         <Head>
@@ -40,18 +41,10 @@ return <Spinner />
         {/* Background overlay */}
   <div className="absolute top-0 left-0 right-0 bottom-0 bg-black/70 z-[1]" />
   <Image 
-  src="https://images.unsplash.com/photo-1534274988757-a28bf1a57c17?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTR8fHdlYXRoZXJ8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60"
+  src={getBackgroundImage}
   layout="fill"
   className='object-cover'
   />
-  {/* Image */}
-  {/* <Background 
-  weatherDescription={data.weather ? data.weather[0].main : null}
-  /> */}
-  {/* <div className=' flex justify-center'>
-    <h1 className=' flex justify-center text-white z-10 text-5xl font-bold '> Weather App</h1>
-  </div> */}
-  
   <div className='relative flex justify-between items-center max-w-[500px] w-full m-auto pt-4 text-white z-10'>
     <form 
     onSubmit={getWeather}
@@ -76,6 +69,4 @@ return <Spinner />
     )
 
   }
-
-}
   
