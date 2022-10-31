@@ -23,6 +23,7 @@ export default function Home() {
     setLoading(true);
     axios.get(url).then((response) =>{
       setWeather(response.data);
+      console.log(response);
       if(response.data.weather[0].main === 'Clouds') { setGetBackgroundImage(Cloudy); 
       } else if (response.data.weather[0].main === 'Rain') { setGetBackgroundImage(Rain);
        } else { setGetBackgroundImage(Sunny); }
