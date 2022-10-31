@@ -14,9 +14,9 @@ export default function Home() {
   const [weather, setWeather] = useState({});
   const [getBackgroundImage, setGetBackgroundImage] = useState(Sunny)
   const [loading, setLoading] = useState(false);
-  const key = '77a6c77dee889c0ce1793d6a6e58a0de'
   
-  const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=imperial&appid=${key}`
+  
+  const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=imperial&appid=${process.env.NEXT_PUBLIC_KEY}`
  
 
   const getWeather = (e) => {
